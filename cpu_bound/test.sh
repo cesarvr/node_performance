@@ -1,7 +1,7 @@
 #!/bin/bash 
 
 #new node process
-node --perf-basic-prof server.js &
+node --trace_deopt --perf-basic-prof server.js &
 LOG=time_table
 
 echo "waiting for server..."
@@ -11,10 +11,11 @@ echo "benchmarking..."
 
 rm $LOG *.log 2> /dev/null 
 
-for i in {1..30} 
+for i in {1..170} 
 do 
-  curl -w '%{time_total}\n' -s -o /dev/null "http://localhost:8080/fib" > $LOG &
-  curl -w '%{time_total}\n' -s -o /dev/null "http://localhost:8080/fast" > $LOG &  
+#  curl -w '%{time_total}\n' -s -o /dev/null "http://localhost:8080/fib" > $LOG &
+ # curl -w '%{time_total}\n' -s -o /dev/null "http://localhost:8080/fast" > $LOG &  
+  curl -w '%{time_total}\n' -s -o /dev/null "http://localhost:8080/ugly" > $LOG &  
 done
 
 

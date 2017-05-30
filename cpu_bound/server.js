@@ -6,15 +6,16 @@ const probe = require('probe-mon')
 
 const FIB_MAX = 40;
 
-let count = 0; 
+let fibonacci = function(n) {
+    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+
+let count = 0;
 let app = express();
 
 //probe
 //app.use(probe());
-
-let fibonacci = function(n) {
-    return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
-}
 
 let memoization = function(fn) {
     let cache = {};
@@ -37,7 +38,7 @@ let warm_up = function() {
 
 app.get('/fast', function(req, res, next) {
     res.send('fast');
-    count ++; 
+    count++;
 });
 
 app.get('/fib', function(req, res, next) {
@@ -50,11 +51,24 @@ app.get('/fib', function(req, res, next) {
         }
     });
 
-    count ++; 
+    count++;
+});
+
+app.get('/ugly', function ugly_func(req, res, next) {
+    var values = [1, "a", 2, "b", 3, "c", 4, "d"];
+    var s = "";
+    for (var i in values) {
+      s += values[i].toString();
+    }
+
+    res.send({'response': s});
+    count++;
 });
 
 app.get('/sample', function(req, res, next) {
-  res.send({'number_request_attended': count});
+    res.send({
+        'number_request_attended': count
+    });
 });
 
 let httpServer = http.createServer(app);
