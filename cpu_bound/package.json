@@ -1,0 +1,15 @@
+{
+  "name": "cpu_bound",
+  "version": "1.0.0",
+  "description": "Just a example of using perf to profile applications ",
+  "main": "application.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4",
+    "probe-mon": "0.0.6"
+  }
+}
