@@ -8,8 +8,9 @@ ENV NODEJS_IP_ADDRESS 0.0.0.0
 EXPOSE 8080
 
 # NodeJS Installation
-RUN echo 'fastestmirror=true' >> /etc/dnf/dnf.conf \
-    && dnf install -y xz perf libstdc++ \
+RUN    echo "kernel.perf_event_paranoid = 0" > /etc/sysctl.d/perf_events.conf \
+    && echo 'fastestmirror=true' >> /etc/dnf/dnf.conf \
+    && dnf install -y xz perf libstdc++ procps-ng \
     && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz" \
     && tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /opt/ \
     && ln -s /opt/node-v$NODE_VERSION-linux-$ARCH/bin/node /usr/local/bin/node \
