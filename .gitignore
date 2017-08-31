@@ -1,3 +1,6 @@
+# don't push perf profiles.
+*.perf  
+
 # Logs
 logs
 *.log
