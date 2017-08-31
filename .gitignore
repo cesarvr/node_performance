@@ -1,5 +1,5 @@
 # don't push perf profiles.
-*.perf  
+*.data  
 
 # Logs
 logs
